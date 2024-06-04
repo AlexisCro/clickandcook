@@ -1,25 +1,33 @@
-import { useState } from 'react'
-import { supabase } from './supabaseClient'
+import { useState } from "react";
+import { supabase } from "./supabaseClient";
+import { View, Text, TextInput, Button } from "react-native";
 
 export default function Auth() {
-  const [loading, setLoading] = useState(false)
-  const [email, setEmail] = useState('')
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
 
   const handleLogin = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
-    setLoading(true)
-    const { error } = await supabase.auth.signInWithOtp({ email })
+    setLoading(true);
+    const { error } = await supabase.auth.signInWithOtp({ email });
 
     if (error) {
-      alert(error.error_description || error.message)
+      alert(error.error_description || error.message);
     } else {
-      alert('Check your email for the login link!')
+      alert("Check your email for the login link!");
     }
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   return (
+    <View>
+      <Text>Supabase + React</Text>
+      <Text>Sign in via magic link with your email below</Text>
+      <TextInput placeholder="Your email" value={email} onChangeText={(e) => setEmail(e.target.value)} />
+      <Button title={loading ? "Loading" : "Send magic link"} onPress={handleLogin} disabled={loading} />
+    </View>
+    /*
     <div className="row flex flex-center">
       <div className="col-6 form-widget">
         <h1 className="header">Supabase + React</h1>
@@ -42,6 +50,6 @@ export default function Auth() {
           </div>
         </form>
       </div>
-    </div>
-  )
+    </div>*/
+  );
 }
