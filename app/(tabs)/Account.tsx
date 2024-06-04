@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { supabase } from "../lib/supabase";
+import { supabase } from "../../lib/supabase";
 import { StyleSheet, View, Alert } from "react-native";
 import { Button, Input } from "@rneui/themed";
 import { Session } from "@supabase/supabase-js";
-import Avatar from "./Avatar";
-import styles from "../assets/stylesheet/style";
+import styles from "../../assets/stylesheet/style";
+import Avatar from "../../components/Avatar";
 
-export default function Account({ session }: { session: Session }) {
+export default function AccountScreen({ session }: { session: Session }) {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState("");
   const [website, setWebsite] = useState("");
@@ -80,13 +80,13 @@ export default function Account({ session }: { session: Session }) {
         />
       </View>
 
-      <View style={[styles.verticallySpaced, styles.mt20]}>
+      <View /*style={[styles.verticallySpaced, styles.mt20]}*/>
         <Input label="Email" value={session?.user?.email} disabled />
       </View>
-      <View style={styles.verticallySpaced}>
+      <View /*style={styles.verticallySpaced}*/>
         <Input label="Username" value={username || ""} onChangeText={(text) => setUsername(text)} />
       </View>
-      <View style={styles.verticallySpaced}>
+      <View /*style={styles.verticallySpaced}*/>
         <Input label="Website" value={website || ""} onChangeText={(text) => setWebsite(text)} />
       </View>
       <View style={styles.button}>

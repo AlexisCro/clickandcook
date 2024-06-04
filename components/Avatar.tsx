@@ -43,11 +43,11 @@ export default function Avatar({ url, size = 150, onUpload }: Props) {
       setUploading(true);
 
       const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images, 
-        allowsMultipleSelection: false, 
-        allowsEditing: true, 
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsMultipleSelection: false,
+        allowsEditing: true,
         quality: 1,
-        exif: false, 
+        exif: false,
       });
 
       if (result.canceled || !result.assets || result.assets.length === 0) {
