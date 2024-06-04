@@ -34,6 +34,13 @@ const styles= StyleSheet.create({
     borderRadius: 20,
     width: '100%',
     marginVertical: 10,
+  },
+  profileContainer: {
+    width: '80%'
+  },
+  avatarContainer: {
+    marginHorizontal: '20%',
+    marginBottom: 20,
   }
 });
 
