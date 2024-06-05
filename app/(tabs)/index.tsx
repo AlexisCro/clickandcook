@@ -1,4 +1,5 @@
 import { ScrollView, Text, View, Image, SafeAreaView, StyleSheet, Pressable } from "react-native";
+import { Link } from 'expo-router';
 import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -45,9 +46,18 @@ export default function Index() {
                     </View>
                   </View>
                   <View style={pizzaStyles.cardFooter}>
-                    <Pressable style={pizzaStyles.pressableEdit}>
-                      <FontAwesome name="edit" size={30} color="black" />
-                    </Pressable>
+                    <Link
+                      style={pizzaStyles.linkEdit}
+                      href={{
+                        pathname: "/Pizza/[id]",
+                        params:   { id: pizza.id }
+                      }}
+                      asChild
+                    >
+                      <Pressable>
+                        <FontAwesome name="edit" size={30} color="black" />
+                      </Pressable>
+                    </Link>
                   </View>
                 </View>
               ))
@@ -112,13 +122,17 @@ const pizzaStyles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 20,
   },
+  linkEdit: {
+    backgroundColor: '#3a9df5',
+    padding: 10,
+    borderRadius: 10,
+  },
   pressableEdit: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    color: 'white',
     backgroundColor: '#3a9df5',
     padding: 10,
-    borderRadius: 5
+    borderRadius: 10,
   }
 })

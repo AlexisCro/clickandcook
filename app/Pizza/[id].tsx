@@ -1,9 +1,10 @@
 import { ScrollView, Text, View, Image, TextInput, StyleSheet } from "react-native";
 import { supabase } from "../../lib/supabase";
 import { useState, useEffect } from "react";
+import { useLocalSearchParams } from "expo-router";
 
-export default function Editpizza(/*idpizza: string*/) {
-  const idpizza = 1;
+export default function Editpizza() {
+  const id = useLocalSearchParams().id;
   const [pizza, setPizza] = useState([]);
 
   useEffect(() => {
@@ -11,7 +12,7 @@ export default function Editpizza(/*idpizza: string*/) {
   }, []);
 
   async function fetchpizzabyid() {
-    const { data, error } = await supabase.from("pizzas").select("*").eq("id", idpizza);
+    const { data, error } = await supabase.from("pizzas").select("*").eq("id", id);
 
     if (error) {
       console.error("Error fetching data:", error);
@@ -25,7 +26,7 @@ export default function Editpizza(/*idpizza: string*/) {
   const IngredientsPizza = [];
 
   async function updatepizza() {
-    const { data, error } = await supabase.from("pizzas").update({ pizza: NamePizza, price: PricePizza, ingredients: IngredientsPizza }).eq("id", idpizza);
+    const { data, error } = await supabase.from("pizzas").update({ pizza: NamePizza, price: PricePizza, ingredients: IngredientsPizza }).eq("id", id);
 
     if (error) {
       console.error("Error updating data:", error);
