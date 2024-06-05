@@ -6,7 +6,7 @@ export default function TabLayout() {
   return (
     <Tabs>
       <Tabs.Screen name="Account" options={{ title: "Home", tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} /> }} />
-      <Tabs.Screen name="commmande" options={{ title: "Commande", tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} /> }} />
+      <Tabs.Screen name="Command" options={{ title: "Commande", tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} /> }} />
     </Tabs>
   );
 }
