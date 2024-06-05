@@ -1,4 +1,4 @@
-import { ScrollView, Text, View, Image, SafeAreaView, StyleSheet, Pressable } from "react-native";
+import { ScrollView, Text, View, Image, SafeAreaView, StyleSheet, Pressable, Button, Alert } from "react-native";
 import { Link } from 'expo-router';
 import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
@@ -6,9 +6,20 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useFocusEffect } from '@react-navigation/native';
 import React from "react";
 
-
 export default function Index() {
   const [pizzas, setPizzas] = useState([])
+
+  const buttonAlert = (id) => {
+    Alert.alert(
+      'Suppression',
+      'Voulez-vous vraiment supprimer cette pizza ?',
+      [
+        {text: 'Annuler', onPress: () => console.log('action unconfirmed'), style: 'cancel'},
+        {text: 'Supprimer', onPress: () => deletePizza(id)},
+      ],
+      { cancelable: false }
+    )
+  }
 
   useFocusEffect(
     React.useCallback(() => {
@@ -23,6 +34,19 @@ export default function Index() {
       return
     }
     setPizzas(pizzas)
+  }
+
+  async function deletePizza(id) {
+      const { data: pizza, error } = await supabase.from('pizzas').delete().eq('id', id)
+
+    if (error) {
+      console.error(error)
+      alert('Une erreur est survenue')
+      return
+    } else {
+      alert('Pizza supprimée')
+      fetchPizzas();
+    }
   }
 
   return (
@@ -59,9 +83,14 @@ export default function Index() {
                       asChild
                     >
                       <Pressable>
-                        <FontAwesome name="edit" size={30} color="black" />
+                        <FontAwesome name="edit" size={30} color="white" />
                       </Pressable>
                     </Link>
+                    <View>
+                      <Pressable style={pizzaStyles.pressableDelete} onPress={() => buttonAlert(pizza.id)}>
+                        <FontAwesome name="trash" size={30} color="white" />
+                      </Pressable>
+                    </View>
                   </View>
                 </View>
               ))
@@ -136,6 +165,14 @@ const pizzaStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#3a9df5',
+    padding: 10,
+    borderRadius: 10,
+  },
+  pressableDelete: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f53a3a',
     padding: 10,
     borderRadius: 10,
   }
