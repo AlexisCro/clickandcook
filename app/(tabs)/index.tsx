@@ -1,6 +1,8 @@
-import { ScrollView, Text, View, Image, SafeAreaView, StyleSheet } from "react-native";
+import { ScrollView, Text, View, Image, SafeAreaView, StyleSheet, Pressable } from "react-native";
 import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+
 
 export default function Index() {
   const [pizzas, setPizzas] = useState([])
@@ -10,7 +12,7 @@ export default function Index() {
   }, [])
 
   async function fetchPizzas() {
-    const { data: pizzas, error } = await supabase.from('pizzas').select('*')
+    const { data: pizzas, error } = await supabase.from('pizzas').select('*').order('price', { ascending: true })
     if (error) {
       console.error(error)
       return
@@ -36,11 +38,16 @@ export default function Index() {
                     <View>
                       <Text style={pizzaStyles.ingredients}>Ingrédients</Text>
                       {
-                        pizza.ingredients.map(ingredient => (
-                          <Text>{ingredient}</Text>
+                        pizza.ingredients.map((ingredient, index) => (
+                          <Text key={index}>{ingredient}</Text>
                         ))
                       }
                     </View>
+                  </View>
+                  <View style={pizzaStyles.cardFooter}>
+                    <Pressable style={pizzaStyles.pressableEdit}>
+                      <FontAwesome name="edit" size={30} color="black" />
+                    </Pressable>
                   </View>
                 </View>
               ))
@@ -97,5 +104,21 @@ const pizzaStyles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 5
+  },
+  cardFooter: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  pressableEdit: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: 'white',
+    backgroundColor: '#3a9df5',
+    padding: 10,
+    borderRadius: 5
   }
 })
