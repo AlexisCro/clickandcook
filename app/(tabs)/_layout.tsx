@@ -7,6 +7,7 @@ export default function TabLayout() {
     <Tabs>
       <Tabs.Screen name="index"   options={{ title: "Pizza", tabBarIcon: ({ color }) => <Ionicons name="pizza-sharp" size={28} color={color} /> }} />
       <Tabs.Screen name="Account" options={{ title: "Account", tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} /> }} />
+      <Tabs.Screen name="CreatePizza" options={{ title: "create pizza", tabBarIcon: ({ color }) => <Ionicons size={28} name="add" color={color} /> }} />
     </Tabs>
   );
 }

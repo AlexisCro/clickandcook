@@ -3,14 +3,18 @@ import { Link } from 'expo-router';
 import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { useFocusEffect } from '@react-navigation/native';
+import React from "react";
 
 
 export default function Index() {
   const [pizzas, setPizzas] = useState([])
 
-  useEffect(() => {
-    fetchPizzas()
-  }, [])
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchPizzas();
+    }, [])
+  );
 
   async function fetchPizzas() {
     const { data: pizzas, error } = await supabase.from('pizzas').select('*').order('price', { ascending: true })
