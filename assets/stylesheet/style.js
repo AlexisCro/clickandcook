@@ -15,7 +15,9 @@ const styles= StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center',
     alignItems: 'center',
-    width: 300
+    width: 300,
+    backgroundColor: 'red',
+    zIndex: 100
   },
   input: {
     backgroundColor: 'white',

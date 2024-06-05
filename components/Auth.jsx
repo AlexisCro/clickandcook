@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, StyleSheet, View, AppState } from "react-native";
+import { Alert, StyleSheet, View, AppState, Text } from "react-native";
 import { supabase } from "../lib/supabase";
 import { Button, Input } from "@rneui/themed";
 import styles from "../assets/stylesheet/style";
@@ -48,21 +48,25 @@ export default function Auth() {
   }
 
   return (
-    <View style={styles.formContainer}>
-      <View style={styles.input}>
-        <View>
-          <Input label="Email" leftIcon={{ type: "font-awesome", name: "envelope" }} onChangeText={(text) => setEmail(text)} value={email} placeholder="email@address.com" autoCapitalize={"none"} />
+    <View style={styles.container}>
+      <View style={styles.formContainer}>
+        {console.log("Auth.tsx")}
+        <Text>Auth Text</Text>
+        <View style={styles.input}>
+          <View>
+            <Input label="Email" leftIcon={{ type: "font-awesome", name: "envelope" }} onChangeText={(text) => setEmail(text)} value={email} placeholder="email@address.com" autoCapitalize={"none"} />
+          </View>
+          <View>
+            <Input label="Password" leftIcon={{ type: "font-awesome", name: "lock" }} onChangeText={(text) => setPassword(text)} value={password} secureTextEntry={true} placeholder="Password" autoCapitalize={"none"} />
+          </View>
         </View>
-        <View>
-          <Input label="Password" leftIcon={{ type: "font-awesome", name: "lock" }} onChangeText={(text) => setPassword(text)} value={password} secureTextEntry={true} placeholder="Password" autoCapitalize={"none"} />
-        </View>
-      </View>
-      <View style={styles.buttonContainer}>
-        <View style={styles.button}>
-          <Button title="Sign in" disabled={loading} onPress={() => signInWithEmail()} />
-        </View>
-        <View style={styles.button}>
-          <Button title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <Button title="Sign in" disabled={loading} onPress={() => signInWithEmail()} />
+          </View>
+          <View style={styles.button}>
+            <Button title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
+          </View>
         </View>
       </View>
     </View>
