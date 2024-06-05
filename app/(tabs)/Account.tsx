@@ -6,7 +6,19 @@ import { Session } from "@supabase/supabase-js";
 import styles from "../../assets/stylesheet/style";
 import Avatar from "../../components/Avatar";
 
-export default function AccountScreen({ session }: { session: Session }) {
+export default function AccountScreen() {
+  const [session, setSession] = useState<Session | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
+  
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState("");
   const [website, setWebsite] = useState("");
