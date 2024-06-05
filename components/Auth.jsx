@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, StyleSheet, View, AppState, Text } from "react-native";
+import { Alert, StyleSheet, View, AppState, Text, Image } from "react-native";
 import { supabase } from "../lib/supabase";
 import { Button, Input } from "@rneui/themed";
 import styles from "../assets/stylesheet/style";
@@ -50,6 +50,7 @@ export default function Auth() {
   return (
     <View style={styles.container}>
       <View style={styles.formContainer}>
+        <Image source={require("../assets/logo.png")} style={styles.logo} />
         <View style={styles.input}>
           <View>
             <Input label="Email" leftIcon={{ type: "font-awesome", name: "envelope" }} onChangeText={(text) => setEmail(text)} value={email} placeholder="email@address.com" autoCapitalize={"none"} />
@@ -69,4 +70,4 @@ export default function Auth() {
       </View>
     </View>
   );
-};
+}

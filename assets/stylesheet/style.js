@@ -1,3 +1,4 @@
+import { LogBox } from "react-native";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -41,6 +42,10 @@ const styles = StyleSheet.create({
   avatarContainer: {
     marginHorizontal: "20%",
     marginBottom: 20,
+  },
+  logo: {
+    width: 200,
+    height: 200,
   },
 });
 
