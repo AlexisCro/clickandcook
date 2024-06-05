@@ -16,7 +16,6 @@ const styles= StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center',
     width: 300,
-    backgroundColor: 'red',
     zIndex: 100
   },
   input: {

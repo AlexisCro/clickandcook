@@ -50,8 +50,6 @@ export default function Auth() {
   return (
     <View style={styles.container}>
       <View style={styles.formContainer}>
-        {console.log("Auth.tsx")}
-        <Text>Auth Text</Text>
         <View style={styles.input}>
           <View>
             <Input label="Email" leftIcon={{ type: "font-awesome", name: "envelope" }} onChangeText={(text) => setEmail(text)} value={email} placeholder="email@address.com" autoCapitalize={"none"} />
