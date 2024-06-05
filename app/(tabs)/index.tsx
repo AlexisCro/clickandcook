@@ -1,6 +1,6 @@
-import { ScrollView, Text, View, Image, SafeAreaView, StyleSheet, Pressable, Button, Alert } from "react-native";
+import { ScrollView, Text, View, SafeAreaView, StyleSheet, Pressable, Alert, ActivityIndicator } from "react-native";
 import { Link } from 'expo-router';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { supabase } from "../../lib/supabase";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useFocusEffect } from '@react-navigation/native';
@@ -95,7 +95,11 @@ export default function Index() {
                 </View>
               ))
             ) : (
-              <Text>Loading...</Text>
+              <View style={pizzaStyles.loadingContainer}>
+                <Text>
+                  <ActivityIndicator size="large" color="#0000ff" style={{ transform: [{ scaleX: 2 }, { scaleY: 2 }], height: 200, width: 200 }} />
+                </Text>
+              </View>
             )
           }
         </ScrollView>
@@ -175,5 +179,10 @@ const pizzaStyles = StyleSheet.create({
     backgroundColor: '#f53a3a',
     padding: 10,
     borderRadius: 10,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 })
