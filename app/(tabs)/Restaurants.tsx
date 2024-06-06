@@ -35,6 +35,7 @@ export default function Restaurants() {
     }
   }
 
+
   useEffect(() => {
     fetchRestaurants();
   }, [session])
