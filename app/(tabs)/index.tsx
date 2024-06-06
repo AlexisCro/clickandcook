@@ -52,7 +52,7 @@ export default function Index() {
   return (
     <>
       <View>
-          <Text style={pizzaStyles.title}>Commande</Text>
+          <Text style={pizzaStyles.title}>Pizzas</Text>
       </View>
 
       <SafeAreaView style={pizzaStyles.container}>
