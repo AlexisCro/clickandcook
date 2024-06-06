@@ -10,14 +10,16 @@ export default function CreateRestaurant() {
   const [session, setSession] = useState<Session | null>(null);
 
   async function getManager() {
-    const { data, error } = await supabase.from("profiles").select("username").eq("id", session?.user.id);
+    if (session?.user.id != undefined) {
+      const { data, error } = await supabase.from("profiles").select("username").eq("id", session?.user.id);
 
-    if (error) {
-      console.error("Error fetching manager:", error);
-      return;
+      if (error) {
+        console.error("Error fetching manager:", error);
+        return;
+      }
+
+      setManager(data[0]["username"]);
     }
-
-    setManager(data[0]["username"]);
   }
 
   useEffect(() => {
@@ -32,7 +34,6 @@ export default function CreateRestaurant() {
 
   useEffect(() => {
     getManager();
-    console.log(manager)
   }, [session]);
 
   async function createRestaurant() {
