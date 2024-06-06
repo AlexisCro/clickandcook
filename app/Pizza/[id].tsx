@@ -32,7 +32,7 @@ export default function Editpizza() {
   async function updatepizza() {
     const { data, error } = await supabase
       .from("pizzas")
-      .update({ pizza: namePizza, price: pricePizza, ingredients: ingredientsPizza.split(", ") })
+      .update({ pizza: namePizza, price: parseFloat(pricePizza.replaceAll(",", ".")), ingredients: ingredientsPizza.split(", ") })
       .eq("id", id);
 
     if (error) {
